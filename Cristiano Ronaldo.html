@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CR7 — The Ultimate Legacy Experience</title>
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@300;500;700;900&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* ==========================================
+       1. VARIABLES & RESET
+       ========================================== */
+    :root {
+      --bg-primary: #050508;
+      --bg-secondary: #0d0e15;
+      --card-bg: rgba(20, 22, 32, 0.7);
+      --gold-primary: #d4af37;
+      --gold-bright: #fff2a3;
+      --gold-dark: #8a6d1c;
+      --gold-glow: rgba(212, 175, 55, 0.4);
+      --text-white: #ffffff;
+      --text-gray: #a0a5b5;
+      --font-title: 'Cinzel', serif;
+      --font-heading: 'Oswald', sans-serif;
+      --font-body: 'Montserrat', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-white);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-primary); border-radius: 4px; }
+
+    /* ==========================================
+       2. NAVIGATION BAR
+       ========================================== */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      background: rgba(5, 5, 8, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+    }
+
+    .nav-logo {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      color: var(--gold-primary);
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-gray);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold-primary); }
+
+    /* ==========================================
+       3. HERO SECTION WITH CANVAS PARTICLES
+       ========================================== */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    #particles-canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 20px;
+    }
+
+    .hero-tag {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      letter-spacing: 6px;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      animation: fadeInDown 1s ease;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: clamp(3.5rem, 12vw, 9rem);
+      font-weight: 900;
+      line-height: 0.95;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #ffffff 20%, var(--gold-primary) 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+      animation: zoomIn 1.2s cubic-bezier(0.1, 0.9, 0.2, 1);
+    }
+
+    .hero-desc {
+      max-width: 650px;
+      margin: 20px auto 0;
+      color: var(--text-gray);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      animation: fadeInUp 1s ease 0.3s backwards;
+    }
+
+    .hero-btns {
+      margin-top: 35px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 1s ease 0.6s backwards;
+    }
+
+    .btn-gold {
+      padding: 16px 40px;
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      color: #000;
+      background: linear-gradient(45deg, var(--gold-primary), var(--gold-bright));
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 0 25px var(--gold-glow);
+      transition: all 0.3s ease;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 0 40px var(--gold-primary);
+    }
+
+    .btn-outline {
+      padding: 16px 40px;
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      color: var(--gold-primary);
+      background: transparent;
+      border: 2px solid var(--gold-primary);
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline:hover {
+      background: rgba(212, 175, 55, 0.1);
+      transform: translateY(-5px);
+    }
+
+    /* ==========================================
+       4. SECTION WRAPPERS & HEADERS
+       ========================================== */
+    section { padding: 120px 20px; position: relative; }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .section-subtitle {
+      font-family: var(--font-heading);
+      color: var(--gold-primary);
+      letter-spacing: 4px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      margin-top: 10px;
+      color: var(--text-white);
+    }
+
+    /* ==========================================
+       5. LIVE COUNTER STATS
+       ========================================== */
+    .stats-bg { background: var(--bg-secondary); }
+
+    .stats-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 20px;
+      padding: 40px 25px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(5px);
+      transition: all 0.4s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-12px);
+      border-color: var(--gold-primary);
+      box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
+    }
+
+    .stat-icon {
+      font-size: 2.5rem;
+      color: var(--gold-primary);
+      margin-bottom: 15px;
+    }
+
+    .stat-num {
+      font-family: var(--font-heading);
+      font-size: 3.8rem;
+      font-weight: 700;
+      color: var(--text-white);
+    }
+
+    .stat-title {
+      color: var(--text-gray);
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      margin-top: 5px;
+    }
+
+    /* ==========================================
+       6. INTERACTIVE TIMELINE WITH SCROLL ANIMATIONS
+       ========================================== */
+    .timeline {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%; top: 0; width: 2px; height: 100%;
+      background: linear-gradient(180deg, transparent, var(--gold-primary), transparent);
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      margin-bottom: 60px;
+      position: relative;
+      width: 50%;
+      padding: 0 40px;
+    }
+
+    .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+    .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+
+    /* DOT ANIMATIONS */
+    .timeline-dot {
+      position: absolute;
+      top: 25px; 
+      width: 16px; 
+      height: 16px;
+      background: var(--bg-primary);
+      border: 3px solid var(--gold-primary);
+      border-radius: 50%;
+      z-index: 5;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-dot { right: -8px; }
+    .timeline-item:nth-child(even) .timeline-dot { left: -8px; }
+
+    /* When scrolled into view: dot expands and glows */
+    .timeline-item.in-view .timeline-dot {
+      background: var(--gold-bright);
+      transform: scale(1.8);
+      box-shadow: 0 0 20px var(--gold-bright), 0 0 40px var(--gold-primary);
+      border-color: #ffffff;
+    }
+
+    /* CARD ANIMATIONS */
+    .timeline-box {
+      background: var(--card-bg);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 30px;
+      border-radius: 16px;
+      opacity: 0;
+      transition: all 0.8s ease-out;
+      transform: translateY(40px);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-box {
+      transform: translateX(-50px) translateY(20px);
+    }
+
+    .timeline-item:nth-child(even) .timeline-box {
+      transform: translateX(50px) translateY(20px);
+    }
+
+    /* When scrolled into view: box slides to center */
+    .timeline-item.in-view .timeline-box {
+      opacity: 1;
+      transform: translateX(0) translateY(0);
+      border-color: rgba(212, 175, 55, 0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .timeline-box:hover {
+      border-color: var(--gold-primary);
+      transform: scale(1.03) !important;
+    }
+
+    .timeline-year {
+      font-family: var(--font-heading);
+      color: var(--gold-primary);
+      font-size: 1.5rem;
+    }
+
+    .timeline-title {
+      font-size: 1.3rem;
+      margin: 10px 0;
+    }
+
+    /* ==========================================
+       7. TROPHY ROOM (3D CARD GLOW)
+       ========================================== */
+    .trophy-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .trophy-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      padding: 40px 30px;
+      border-radius: 20px;
+      text-align: center;
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    .trophy-card:hover {
+      transform: translateY(-10px) rotateX(10deg);
+      border-color: var(--gold-primary);
+      box-shadow: 0 20px 40px rgba(212, 175, 55, 0.25);
+    }
+
+    .trophy-img {
+      font-size: 4rem;
+      color: var(--gold-primary);
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 15px var(--gold-glow));
+    }
+
+    /* ==========================================
+       8. QUOTES CAROUSEL
+       ========================================== */
+    .quotes-bg { background: var(--bg-secondary); }
+
+    .quote-box {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 50px 30px;
+      background: var(--card-bg);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 20px;
+      position: relative;
+    }
+
+    .quote-text {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      line-height: 1.6;
+      color: var(--gold-bright);
+      margin-bottom: 20px;
+    }
+
+    .quote-author {
+      color: var(--text-gray);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ==========================================
+       9. FULL-SCREEN SIUUU EXPERIENCE
+       ========================================== */
+    .siuuu-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(5, 5, 8, 0.96);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .siuuu-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .siuuu-text {
+      font-family: var(--font-title);
+      font-size: clamp(6rem, 28vw, 18rem);
+      font-weight: 900;
+      color: var(--gold-primary);
+      text-shadow: 0 0 80px var(--gold-primary), 0 0 150px var(--gold-bright);
+      transform: scale(0.1);
+      transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .siuuu-overlay.active .siuuu-text { transform: scale(1); }
+
+    .close-siuuu {
+      margin-top: 40px;
+      padding: 14px 40px;
+      background: transparent;
+      border: 2px solid var(--gold-primary);
+      color: var(--gold-primary);
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+
+    /* KEYFRAMES */
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes zoomIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .timeline::before { left: 20px; }
+      .timeline-item { width: 100%; padding-left: 50px; text-align: left !important; }
+      .timeline-item:nth-child(even) { left: 0; }
+      .timeline-dot { left: 12px !important; }
+      .timeline-item:nth-child(odd) .timeline-box, 
+      .timeline-item:nth-child(even) .timeline-box {
+        transform: translateY(30px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <a href="#" class="nav-logo">CR7</a>
+    <ul class="nav-links">
+      <li><a href="#stats">Stats</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#trophies">Trophies</a></li>
+      <li><a href="#quotes">Quotes</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <canvas id="particles-canvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-tag">The Living Legend</div>
+      <h1 class="hero-title">CRISTIANO<br>RONALDO</h1>
+      <p class="hero-desc">Over two decades of dominance, relentless hard work, and unprecedented success in world football.</p>
+      <div class="hero-btns">
+        <button class="btn-gold" onclick="triggerSiuuu()"><i class="fa-solid fa-bolt"></i> SIUUU CELEBRATION</button>
+        <button class="btn-outline" onclick="scrollToSection('stats')">EXPLORE STATS</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS SECTION -->
+  <section id="stats" class="stats-bg">
+    <div class="section-header">
+      <div class="section-subtitle">Career Milestones</div>
+      <h2 class="section-title">The Numbers of Greatness</h2>
+    </div>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <i class="fa-solid fa-futbol stat-icon"></i>
+        <div class="stat-num" data-target="900">0</div>
+        <div class="stat-title">Official Career Goals</div>
+      </div>
+      <div class="stat-card">
+        <i class="fa-solid fa-trophy stat-icon"></i>
+        <div class="stat-num" data-target="5">0</div>
+        <div class="stat-title">Ballon d'Or Titles</div>
+      </div>
+      <div class="stat-card">
+        <i class="fa-solid fa-crown stat-icon"></i>
+        <div class="stat-num" data-target="5">0</div>
+        <div class="stat-title">UCL Trophies</div>
+      </div>
+      <div class="stat-card">
+        <i class="fa-solid fa-globe stat-icon"></i>
+        <div class="stat-num" data-target="130">0</div>
+        <div class="stat-title">International Goals</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE SECTION -->
+  <section id="timeline">
+    <div class="section-header">
+      <div class="section-subtitle">Chronology</div>
+      <h2 class="section-title">The Epic Journey</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-box">
+          <div class="timeline-year">2002 - Sporting CP</div>
+          <div class="timeline-title">The Beginning</div>
+          <p style="color: var(--text-gray);">Makes his professional debut in Lisbon, immediately catching the attention of Sir Alex Ferguson.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-box">
+          <div class="timeline-year">2003 - Manchester United</div>
+          <div class="timeline-title">Becoming a World Star</div>
+          <p style="color: var(--text-gray);">Inherits the iconic No. 7 shirt, wins 3 Premier League titles, his first UCL, and first Ballon d'Or in 2008.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-box">
+          <div class="timeline-year">2009 - Real Madrid</div>
+          <div class="timeline-title">The Galáctico Era</div>
+          <p style="color: var(--text-gray);">Scores 450 goals in 438 games, breaking all club records and winning 4 UEFA Champions League titles.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-box">
+          <div class="timeline-year">2016 - Portugal</div>
+          <div class="timeline-title">European Champion</div>
+          <p style="color: var(--text-gray);">Captains Portugal to victory at Euro 2016, securing the country's first major international trophy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TROPHY ROOM -->
+  <section id="trophies" class="stats-bg">
+    <div class="section-header">
+      <div class="section-subtitle">Hardware</div>
+      <h2 class="section-title">The Trophy Cabinet</h2>
+    </div>
+
+    <div class="trophy-grid">
+      <div class="trophy-card">
+        <i class="fa-solid fa-award trophy-img"></i>
+        <h3>5x Ballon d'Or</h3>
+        <p style="color: var(--text-gray); margin-top: 10px;">2008, 2013, 2014, 2016, 2017</p>
+      </div>
+      <div class="trophy-card">
+        <i class="fa-solid fa-champagne-glasses trophy-img"></i>
+        <h3>5x Champions League</h3>
+        <p style="color: var(--text-gray); margin-top: 10px;">2008, 2014, 2016, 2017, 2018</p>
+      </div>
+      <div class="trophy-card">
+        <i class="fa-solid fa-earth-europe trophy-img"></i>
+        <h3>4x European Golden Shoe</h3>
+        <p style="color: var(--text-gray); margin-top: 10px;">2008, 2011, 2014, 2015</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTES SECTION -->
+  <section id="quotes">
+    <div class="section-header">
+      <div class="section-subtitle">Mindset</div>
+      <h2 class="section-title">Words of Wisdom</h2>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text" id="quoteDisplay">"Your love makes me strong, your hate makes me unstoppable."</div>
+      <div class="quote-author">— Cristiano Ronaldo</div>
+      <button class="btn-outline" style="margin-top: 25px; padding: 10px 25px;" onclick="nextQuote()">NEXT QUOTE</button>
+    </div>
+  </section>
+
+  <!-- SIUUU OVERLAY MODAL -->
+  <div class="siuuu-overlay" id="siuuuOverlay">
+    <div class="siuuu-text">SIUUU!</div>
+    <button class="close-siuuu" onclick="closeSiuuu()">CLOSE</button>
+  </div>
+
+  <footer style="text-align: center; padding: 40px; border-top: 1px solid rgba(212,175,55,0.1); color: var(--text-gray);">
+    CR7 Tribute Web Application • Single File Build
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // 1. PARTICLES BACKGROUND CANVAS
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particlesArray = [];
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.size > 0.2) this.size -= 0.005;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 3 + 1;
+        }
+      }
+      draw() {
+        ctx.fillStyle = 'rgba(212, 175, 55, 0.5)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particlesArray = [];
+      for (let i = 0; i < 70; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    initParticles();
+    animateParticles();
+
+    // 2. SCROLL OBSERVER FOR TIMELINE DOTS & CARDS
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    const observerOptions = {
+      threshold: 0.4
+    };
+
+    const timelineObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    }, observerOptions);
+
+    timelineItems.forEach(item => {
+      timelineObserver.observe(item);
+    });
+
+    // 3. SCROLL TO SECTION
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // 4. STATS ANIMATION
+    const counters = document.querySelectorAll('.stat-num');
+    let animated = false;
+
+    window.addEventListener('scroll', () => {
+      const statsSection = document.getElementById('stats');
+      const pos = statsSection.getBoundingClientRect().top;
+      if (pos < window.innerHeight / 1.2 && !animated) {
+        animated = true;
+        counters.forEach(counter => {
+          const target = +counter.getAttribute('data-target');
+          let count = 0;
+          const inc = Math.ceil(target / 40);
+          const timer = setInterval(() => {
+            count += inc;
+            if (count >= target) {
+              counter.innerText = target + "+";
+              clearInterval(timer);
+            } else {
+              counter.innerText = count;
+            }
+          }, 30);
+        });
+      }
+    });
+
+    // 5. QUOTES ROTATOR
+    const quotes = [
+      '"Your love makes me strong, your hate makes me unstoppable."',
+      '"I am not a perfectionist, but I like to feel that things are done well."',
+      '"Dreams are not what you see in your sleep, dreams are things which do not let you sleep."',
+      '"Without hard work, talent is nothing."'
+    ];
+    let qIdx = 0;
+
+    function nextQuote() {
+      qIdx = (qIdx + 1) % quotes.length;
+      document.getElementById('quoteDisplay').innerText = quotes[qIdx];
+    }
+
+    // 6. SIUUU OVERLAY & VIBRATION
+    function triggerSiuuu() {
+      document.getElementById('siuuuOverlay').classList.add('active');
+      if (navigator.vibrate) navigator.vibrate([100, 50, 300]);
+    }
+
+    function closeSiuuu() {
+      document.getElementById('siuuuOverlay').classList.remove('active');
+    }
+  </script>
+</body>
+</html>
